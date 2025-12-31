@@ -1,217 +1,937 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahasa Indonesia Kreatif | Portal Belajar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
-        
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bahasa Indonesia Kreatif | Portal Belajar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+        
+        * {
+            font-family: 'Poppins', sans-serif;
         }
 
         .hero-gradient {
-            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 50%, #fed7aa 100%);
         }
 
         .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: blob 8s ease-in-out infinite;
         }
 
         @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
         }
-        .animate-blob {
-            animation: blob 7s infinite;
+
+        .nav-link {
+            position: relative;
         }
-        .animation-delay-2000 {
-            animation-delay: 2s;
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ea580c;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .menu-card {
+            background: linear-gradient(145deg, #ffffff 0%, #fefce8 100%);
+        }
+
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
-</head>
-<body class="bg-slate-50 text-slate-900">
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-amber-50 text-slate-900 overflow-auto">
+  <div class="min-h-full w-full"><!-- Header & Navigation -->
+   <header class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-amber-100 shadow-sm">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+     <div class="flex items-center gap-3">
+      <div class="bg-gradient-to-br from-orange-500 to-red-600 p-2.5 rounded-xl shadow-lg shadow-orange-200">
+       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+       </svg>
+      </div><span id="site-title" class="text-xl font-extrabold tracking-tight"> <span class="text-slate-800">Bahasa</span><span class="text-orange-600">ID</span> </span>
+     </div><!-- Desktop Menu -->
+     <div class="hidden md:flex items-center gap-8 font-semibold text-slate-600"><a href="#materi" class="nav-link hover:text-orange-600 transition">Materi</a> <a href="#lkpd" class="nav-link hover:text-orange-600 transition">LKPD</a> <a href="#kuis" class="nav-link hover:text-orange-600 transition">Kuis</a> <a href="#asesmen" class="nav-link hover:text-orange-600 transition">Asesmen</a>
+     </div>
+     <div class="flex items-center gap-4"><button id="mobile-menu-btn" class="md:hidden text-slate-600 p-2">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </nav><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-amber-100 px-6 py-4">
+     <div class="flex flex-col gap-4 font-semibold text-slate-600"><a href="#materi" class="hover:text-orange-600 transition py-2">����� Materi</a> <a href="#lkpd" class="hover:text-orange-600 transition py-2">📝 LKPD</a> <a href="#kuis" class="hover:text-orange-600 transition py-2">🎯 Kuis</a> <a href="#asesmen" class="hover:text-orange-600 transition py-2">📊 Asesmen</a>
+     </div>
+    </div>
+   </header><!-- Hero Section -->
+   <section class="hero-gradient pt-28 pb-16 px-6 relative overflow-hidden"><!-- Decorative Elements -->
+    <div class="absolute top-20 right-10 w-72 h-72 bg-green-300/30 blob blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-96 h-96 bg-yellow-300/20 blob blur-3xl" style="animation-delay: -4s;"></div>
+    <div class="container mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10">
+     <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur text-green-700 rounded-full text-sm font-bold shadow-lg"><span class="w-2 h-2 bg-green-500 rounded-full pulse-ring"></span> Portal Belajar SMP YPS Singkole
+      </div>
+      <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">Kuasai Bahasa, <br><span class="gradient-text">Genggam Dunia.</span></h1>
+      <p id="hero-subheading" class="text-lg text-slate-600 max-w-lg leading-relaxed">Platform pembelajaran Bahasa Indonesia yang interaktif, menyenangkan, dan sesuai dengan Kurikulum Merdeka untuk siswa SMP.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"><a href="#menu" class="group bg-gradient-to-r from-green-500 to-yellow-500 text-white px-8 py-4 rounded-2xl font-bold hover:shadow-2xl hover:shadow-green-300 transition-all duration-300 flex items-center justify-center gap-3"> Mulai Belajar 
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg></a> <a href="#about" class="bg-white text-slate-700 px-8 py-4 rounded-2xl font-bold border-2 border-amber-200 hover:border-orange-300 hover:bg-amber-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg> Lihat Video </a>
+      </div><!-- Stats -->
+      <div class="flex flex-wrap justify-center lg:justify-start gap-8 pt-8">
+       <div class="text-center">
+        <div class="text-3xl font-extrabold text-green-600">
+         500+
+        </div>
+        <div class="text-sm text-slate-500 font-medium">
+         Siswa Aktif
+        </div>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl font-extrabold text-green-600">
+         50+
+        </div>
+        <div class="text-sm text-slate-500 font-medium">
+         Materi Lengkap
+        </div>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl font-extrabold text-green-600">
+         98%
+        </div>
+        <div class="text-sm text-slate-500 font-medium">
+         Tingkat Kepuasan
+        </div>
+       </div>
+      </div>
+     </div><!-- Hero Illustration -->
+     <div class="lg:w-1/2 flex justify-center">
+      <div class="relative floating">
+       <div class="w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-green-400 to-yellow-400 rounded-3xl shadow-2xl shadow-green-300 flex items-center justify-center transform rotate-3">
+        <div class="bg-white/95 backdrop-blur rounded-2xl p-8 m-6 space-y-4 transform -rotate-3">
+         <div class="flex items-center gap-3 mb-4">
+          <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+          <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+          <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+         </div>
+         <div class="text-5xl mb-4">
+          📚
+         </div>
+         <h3 class="font-bold text-lg text-slate-800">Belajar Interaktif</h3>
+         <div class="space-y-2">
+          <div class="h-2 bg-green-300 rounded-full w-full"></div>
+          <div class="h-2 bg-lime-200 rounded-full w-4/5"></div>
+          <div class="h-2 bg-yellow-200 rounded-full w-3/5"></div>
+         </div>
+         <div class="flex items-center gap-2 pt-2"><span class="text-xs font-semibold text-green-600 bg-green-100 px-2 py-1 rounded-full">Kurikulum Merdeka</span>
+         </div>
+        </div>
+       </div><!-- Floating Elements -->
+       <div class="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-xl" style="animation: float 4s ease-in-out infinite; animation-delay: -2s;"><span class="text-3xl">🎯</span>
+       </div>
+       <div class="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-xl" style="animation: float 5s ease-in-out infinite; animation-delay: -1s;"><span class="text-3xl">✨</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Menu Section -->
+   <section id="menu" class="py-20 px-6 bg-white">
+    <div class="container mx-auto">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-green-100 text-green-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> Menu Utama </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Pilih Aktivitas Belajarmu</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Jelajahi berbagai fitur pembelajaran yang dirancang khusus untuk membantumu menguasai Bahasa Indonesia</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><!-- Materi Card --> <a href="#materi" class="menu-card card-hover rounded-3xl p-8 border-2 border-lime-100 hover:border-green-300 group cursor-pointer">
+       <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-blue-200">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+       </div><h3 class="text-xl font-bold text-slate-900 mb-2">Materi Pembelajaran</h3><p class="text-slate-600 text-sm mb-4">Pelajari teori dan konsep Bahasa Indonesia dengan materi yang lengkap dan terstruktur</p>
+       <div class="flex items-center text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all">
+        Mulai Belajar 
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div></a> <!-- LKPD Card --> <a href="#lkpd" class="menu-card card-hover rounded-3xl p-8 border-2 border-lime-100 hover:border-green-300 group cursor-pointer">
+       <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-emerald-200">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+       </div><h3 class="text-xl font-bold text-slate-900 mb-2">LKPD Interaktif</h3><p class="text-slate-600 text-sm mb-4">Lembar Kerja Peserta Didik digital yang interaktif dan menyenangkan</p>
+       <div class="flex items-center text-emerald-600 font-semibold text-sm group-hover:gap-3 transition-all">
+        Kerjakan LKPD 
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div></a> <!-- Kuis Card --> <a href="#kuis" class="menu-card card-hover rounded-3xl p-8 border-2 border-lime-100 hover:border-green-300 group cursor-pointer">
+       <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-purple-200">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div><h3 class="text-xl font-bold text-slate-900 mb-2">Kuis Interaktif</h3><p class="text-slate-600 text-sm mb-4">Uji pemahamanmu dengan kuis yang seru dan mendapatkan skor langsung</p>
+       <div class="flex items-center text-purple-600 font-semibold text-sm group-hover:gap-3 transition-all">
+        Ikuti Kuis 
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div></a> <!-- Asesmen Card --> <a href="#asesmen" class="menu-card card-hover rounded-3xl p-8 border-2 border-lime-100 hover:border-green-300 group cursor-pointer">
+       <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-green-200">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+       </div><h3 class="text-xl font-bold text-slate-900 mb-2">Asesmen</h3><p class="text-slate-600 text-sm mb-4">Evaluasi komprehensif untuk mengukur pencapaian belajarmu</p>
+       <div class="flex items-center text-green-600 font-semibold text-sm group-hover:gap-3 transition-all">
+        Mulai Asesmen 
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div></a>
+     </div>
+    </div>
+   </section><!-- Materi Section -->
+   <section id="materi" class="py-20 px-6 bg-gradient-to-b from-amber-50 to-white">
+    <div class="container mx-auto">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> 📚 Materi Pembelajaran </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Materi Kelas VII - IX</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Pilih kelas dan mulai perjalanan belajarmu dengan materi yang terstruktur</p>
+     </div><!-- Class Tabs -->
+     <div class="flex justify-center mb-12">
+      <div class="inline-flex bg-white rounded-2xl p-2 shadow-lg border border-amber-100"><button onclick="showClass(7)" id="btn-class-7" class="class-btn px-8 py-3 rounded-xl font-bold transition-all bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg"> Kelas VII </button> <button onclick="showClass(8)" id="btn-class-8" class="class-btn px-8 py-3 rounded-xl font-bold transition-all text-slate-600 hover:bg-amber-50"> Kelas VIII </button> <button onclick="showClass(9)" id="btn-class-9" class="class-btn px-8 py-3 rounded-xl font-bold transition-all text-slate-600 hover:bg-amber-50"> Kelas IX </button>
+      </div>
+     </div><!-- Class Content -->
+     <div id="class-content-7" class="class-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📖
+        </div>
+        <div><span class="text-xs font-bold text-blue-600 uppercase">Bab 1</span>
+         <h4 class="font-bold text-slate-900 mb-1">Menyimak Cerita Fantasi</h4>
+         <p class="text-sm text-slate-500">Belajar memahami dan menganalisis cerita fantasi</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">8 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">3 Video</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         ✍️
+        </div>
+        <div><span class="text-xs font-bold text-emerald-600 uppercase">Bab 2</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Prosedur</h4>
+         <p class="text-sm text-slate-500">Menulis dan memahami teks prosedur dengan baik</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">6 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">2 Video</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📝
+        </div>
+        <div><span class="text-xs font-bold text-purple-600 uppercase">Bab 3</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Laporan Hasil Observasi</h4>
+         <p class="text-sm text-slate-500">Menyusun laporan dari hasil pengamatan</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">7 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">4 Video</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         🎭
+        </div>
+        <div><span class="text-xs font-bold text-orange-600 uppercase">Bab 4</span>
+         <h4 class="font-bold text-slate-900 mb-1">Puisi Rakyat</h4>
+         <p class="text-sm text-slate-500">Mengenal dan menulis pantun, syair, gurindam</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">5 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">3 Video</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📰
+        </div>
+        <div><span class="text-xs font-bold text-pink-600 uppercase">Bab 5</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Deskripsi</h4>
+         <p class="text-sm text-slate-500">Mendeskripsikan objek secara detail</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">6 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">2 Video</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         💬
+        </div>
+        <div><span class="text-xs font-bold text-cyan-600 uppercase">Bab 6</span>
+         <h4 class="font-bold text-slate-900 mb-1">Surat Pribadi dan Dinas</h4>
+         <p class="text-sm text-slate-500">Menulis surat dengan format yang benar</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">4 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">2 Video</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="class-content-8" class="class-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📰
+        </div>
+        <div><span class="text-xs font-bold text-emerald-600 uppercase">Bab 1</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Berita</h4>
+         <p class="text-sm text-slate-500">Memahami struktur dan menulis berita</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">7 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📢
+        </div>
+        <div><span class="text-xs font-bold text-blue-600 uppercase">Bab 2</span>
+         <h4 class="font-bold text-slate-900 mb-1">Iklan, Slogan, dan Poster</h4>
+         <p class="text-sm text-slate-500">Membuat media promosi yang menarik</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">5 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         💡
+        </div>
+        <div><span class="text-xs font-bold text-purple-600 uppercase">Bab 3</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Eksposisi</h4>
+         <p class="text-sm text-slate-500">Menyampaikan gagasan dengan argumentasi</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">6 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         ��
+        </div>
+        <div><span class="text-xs font-bold text-orange-600 uppercase">Bab 4</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Drama</h4>
+         <p class="text-sm text-slate-500">Menulis dan mementaskan drama</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">8 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📖
+        </div>
+        <div><span class="text-xs font-bold text-rose-600 uppercase">Bab 5</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Ulasan</h4>
+         <p class="text-sm text-slate-500">Memberikan penilaian terhadap karya</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">5 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📜
+        </div>
+        <div><span class="text-xs font-bold text-teal-600 uppercase">Bab 6</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Persuasi</h4>
+         <p class="text-sm text-slate-500">Meyakinkan pembaca dengan bahasa</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">6 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="class-content-9" class="class-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📚
+        </div>
+        <div><span class="text-xs font-bold text-purple-600 uppercase">Bab 1</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Laporan Percobaan</h4>
+         <p class="text-sm text-slate-500">Menyusun laporan hasil eksperimen</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">6 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         💬
+        </div>
+        <div><span class="text-xs font-bold text-indigo-600 uppercase">Bab 2</span>
+         <h4 class="font-bold text-slate-900 mb-1">Pidato Persuasif</h4>
+         <p class="text-sm text-slate-500">Menyusun dan menyampaikan pidato</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">7 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📖
+        </div>
+        <div><span class="text-xs font-bold text-pink-600 uppercase">Bab 3</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Cerpen</h4>
+         <p class="text-sm text-slate-500">Menulis cerita pendek yang menarik</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">8 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📜
+        </div>
+        <div><span class="text-xs font-bold text-amber-600 uppercase">Bab 4</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Tanggapan</h4>
+         <p class="text-sm text-slate-500">Menanggapi berbagai fenomena</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">5 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         💭
+        </div>
+        <div><span class="text-xs font-bold text-cyan-600 uppercase">Bab 5</span>
+         <h4 class="font-bold text-slate-900 mb-1">Teks Diskusi</h4>
+         <p class="text-sm text-slate-500">Menyusun argumen pro dan kontra</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">6 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+         📝
+        </div>
+        <div><span class="text-xs font-bold text-emerald-600 uppercase">Bab 6</span>
+         <h4 class="font-bold text-slate-900 mb-1">Buku Fiksi dan Nonfiksi</h4>
+         <p class="text-sm text-slate-500">Menelaah dan meringkas buku</p>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">7 Materi</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- LKPD Section -->
+   <section id="lkpd" class="py-20 px-6 bg-white">
+    <div class="container mx-auto">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> 📝 LKPD Interaktif </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Lembar Kerja Digital</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Kerjakan lembar kerja secara digital dengan fitur interaktif</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border-2 border-emerald-100 card-hover">
+       <div class="flex items-center justify-between mb-6"><span class="text-4xl">📄</span> <span class="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full">Kelas VII</span>
+       </div>
+       <h3 class="text-xl font-bold text-slate-900 mb-2">LKPD Teks Fantasi</h3>
+       <p class="text-slate-600 text-sm mb-4">Menganalisis unsur intrinsik dan ekstrinsik cerita fantasi</p>
+       <div class="flex items-center justify-between"><span class="text-xs text-slate-500">⏱️ 45 menit</span> <button class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-bold hover:bg-emerald-700 transition"> Kerjakan </button>
+       </div>
+      </div>
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border-2 border-blue-100 card-hover">
+       <div class="flex items-center justify-between mb-6"><span class="text-4xl">📋</span> <span class="px-3 py-1 bg-blue-500 text-white text-xs font-bold rounded-full">Kelas VIII</span>
+       </div>
+       <h3 class="text-xl font-bold text-slate-900 mb-2">LKPD Teks Berita</h3>
+       <p class="text-slate-600 text-sm mb-4">Menyusun berita dengan teknik 5W + 1H</p>
+       <div class="flex items-center justify-between"><span class="text-xs text-slate-500">⏱️ 60 menit</span> <button class="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-bold hover:bg-blue-700 transition"> Kerjakan </button>
+       </div>
+      </div>
+      <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 border-2 border-purple-100 card-hover">
+       <div class="flex items-center justify-between mb-6"><span class="text-4xl">📑</span> <span class="px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">Kelas IX</span>
+       </div>
+       <h3 class="text-xl font-bold text-slate-900 mb-2">LKPD Pidato Persuasif</h3>
+       <p class="text-slate-600 text-sm mb-4">Menyusun naskah pidato yang meyakinkan</p>
+       <div class="flex items-center justify-between"><span class="text-xs text-slate-500">⏱️ 50 menit</span> <button class="px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-bold hover:bg-purple-700 transition"> Kerjakan </button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Kuis Section -->
+   <section id="kuis" class="py-20 px-6 bg-gradient-to-b from-purple-50 to-white">
+    <div class="container mx-auto">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> �� Kuis Interaktif </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Uji Pemahamanmu</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Tantang dirimu dengan kuis seru dan dapatkan skor terbaikmu!</p>
+     </div>
+     <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-3xl p-8 shadow-xl border border-purple-100">
+       <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-lg shadow-purple-200"><span class="text-6xl">🏆</span>
+        </div>
+        <div class="flex-1 text-center md:text-left">
+         <h3 class="text-2xl font-bold text-slate-900 mb-2">Kuis Harian</h3>
+         <p class="text-slate-600 mb-4">Jawab 10 soal pilihan ganda dan dapatkan poin untuk leaderboard!</p>
+         <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-6"><span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">10 Soal</span> <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">15 Menit</span> <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">+50 Poin</span>
+         </div><button onclick="startQuiz()" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-2xl font-bold hover:shadow-lg hover:shadow-purple-300 transition-all"> Mulai Kuis Sekarang </button>
+        </div>
+       </div>
+      </div><!-- Quiz Container -->
+      <div id="quiz-container" class="hidden mt-8 bg-white rounded-3xl p-8 shadow-xl border border-purple-100">
+       <div class="flex justify-between items-center mb-6"><span id="quiz-progress" class="text-sm font-bold text-purple-600">Soal 1 dari 5</span> <span id="quiz-timer" class="px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-bold">⏱️ 02:00</span>
+       </div>
+       <div id="quiz-question" class="mb-8">
+        <h4 class="text-xl font-bold text-slate-900 mb-6">Apa yang dimaksud dengan teks prosedur?</h4>
+        <div class="space-y-3"><button onclick="selectAnswer(this, 0)" class="quiz-option w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-purple-400 hover:bg-purple-50 transition font-medium"> A. Teks yang berisi langkah-langkah melakukan sesuatu </button> <button onclick="selectAnswer(this, 1)" class="quiz-option w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-purple-400 hover:bg-purple-50 transition font-medium"> B. Teks yang berisi cerita fantasi </button> <button onclick="selectAnswer(this, 2)" class="quiz-option w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-purple-400 hover:bg-purple-50 transition font-medium"> C. Teks yang berisi laporan berita </button> <button onclick="selectAnswer(this, 3)" class="quiz-option w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-purple-400 hover:bg-purple-50 transition font-medium"> D. Teks yang berisi puisi rakyat </button>
+        </div>
+       </div>
+       <div class="flex justify-between"><button onclick="prevQuestion()" id="prev-btn" class="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold hover:bg-slate-200 transition disabled:opacity-50" disabled> ← Sebelumnya </button> <button onclick="nextQuestion()" id="next-btn" class="px-6 py-3 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition"> Selanjutnya → </button>
+       </div>
+      </div><!-- Quiz Result -->
+      <div id="quiz-result" class="hidden mt-8 bg-white rounded-3xl p-8 shadow-xl border border-purple-100 text-center">
+       <div class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-200"><span class="text-5xl">🎉</span>
+       </div>
+       <h3 class="text-2xl font-bold text-slate-900 mb-2">Selamat!</h3>
+       <p id="result-score" class="text-4xl font-extrabold text-purple-600 mb-4">80/100</p>
+       <p class="text-slate-600 mb-6">Kamu menjawab 4 dari 5 soal dengan benar</p><button onclick="restartQuiz()" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-2xl font-bold hover:shadow-lg hover:shadow-purple-300 transition-all"> Coba Lagi </button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Asesmen Section -->
+   <section id="asesmen" class="py-20 px-6 bg-white">
+    <div class="container mx-auto">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> 📊 Asesmen </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Evaluasi Pembelajaran</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Ukur pencapaian belajarmu dengan asesmen yang komprehensif</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-8 text-white card-hover">
+       <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+        <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold mb-2">Asesmen Diagnostik</h3>
+       <p class="text-blue-100 text-sm mb-6">Mengukur kemampuan awal sebelum pembelajaran</p><button class="w-full py-3 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition"> Mulai Asesmen </button>
+      </div>
+      <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-3xl p-8 text-white card-hover">
+       <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+        <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold mb-2">Asesmen Formatif</h3>
+       <p class="text-emerald-100 text-sm mb-6">Evaluasi selama proses pembelajaran</p><button class="w-full py-3 bg-white text-emerald-600 rounded-xl font-bold hover:bg-emerald-50 transition"> Mulai Asesmen </button>
+      </div>
+      <div class="bg-gradient-to-br from-green-500 to-yellow-500 rounded-3xl p-8 text-white card-hover">
+       <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+        <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold mb-2">Asesmen Sumatif</h3>
+       <p class="text-green-100 text-sm mb-6">Evaluasi akhir pencapaian pembelajaran</p><button class="w-full py-3 bg-white text-green-600 rounded-xl font-bold hover:bg-green-50 transition"> Mulai Asesmen </button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="bg-slate-900 text-white py-16 px-6">
+    <div class="container mx-auto">
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div>
+       <div class="flex items-center gap-3 mb-6">
+        <div class="bg-gradient-to-br from-green-500 to-yellow-500 p-2.5 rounded-xl">
+         <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+         </svg>
+        </div><span class="text-xl font-extrabold">BahasaID</span>
+       </div>
+       <p class="text-slate-400 text-sm">Platform pembelajaran Bahasa Indonesia yang interaktif untuk siswa SMP YPS Singkole.</p>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">Menu</h4>
+       <ul class="space-y-2 text-slate-400 text-sm">
+        <li><a href="#materi" class="hover:text-green-400 transition">Materi</a></li>
+        <li><a href="#lkpd" class="hover:text-green-400 transition">LKPD</a></li>
+        <li><a href="#kuis" class="hover:text-green-400 transition">Kuis</a></li>
+        <li><a href="#asesmen" class="hover:text-green-400 transition">Asesmen</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">Kelas</h4>
+       <ul class="space-y-2 text-slate-400 text-sm">
+        <li><a href="#" class="hover:text-green-400 transition">Kelas VII</a></li>
+        <li><a href="#" class="hover:text-green-400 transition">Kelas VIII</a></li>
+        <li><a href="#" class="hover:text-green-400 transition">Kelas IX</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">Kontak</h4>
+       <ul class="space-y-2 text-slate-400 text-sm">
+        <li>📍 SMP YPS Singkole</li>
+        <li>📧 info@smpyps.sch.id</li>
+        <li>📞 (0462) 123456</li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
+      <p>© 2024 BahasaID - SMP YPS Singkole. Hak Cipta Dilindungi.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            site_title: 'BahasaID',
+            hero_heading: 'Kuasai Bahasa, Genggam Dunia.',
+            hero_subheading: 'Platform pembelajaran Bahasa Indonesia yang interaktif, menyenangkan, dan sesuai dengan Kurikulum Merdeka untuk siswa SMP.',
+            background_color: '#fffbeb',
+            surface_color: '#ffffff',
+            text_color: '#0f172a',
+            primary_action_color: '#16a34a',
+            secondary_action_color: '#eab308'
+        };
 
-    <!-- Header & Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="bg-indigo-600 p-2 rounded-lg">
-                    <i class="fas fa-book-open text-white"></i>
-                </div>
-                <span class="text-xl font-extrabold tracking-tight text-indigo-900">Bahasa<span class="text-indigo-600">ID</span></span>
-            </div>
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange: async (config) => {
+                    const customFont = config.font_family || 'Poppins';
+                    const baseFontStack = 'sans-serif';
+                    const fontSize = config.font_size || 16;
+
+                    // Apply font
+                    document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+                    // Apply font sizes
+                    document.querySelectorAll('h1').forEach(el => el.style.fontSize = `${fontSize * 3}px`);
+                    document.querySelectorAll('h2').forEach(el => el.style.fontSize = `${fontSize * 2}px`);
+                    document.querySelectorAll('h3').forEach(el => el.style.fontSize = `${fontSize * 1.25}px`);
+                    document.querySelectorAll('p').forEach(el => el.style.fontSize = `${fontSize}px`);
+
+                    // Apply colors
+                    document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
+                    document.querySelectorAll('.menu-card, .bg-white').forEach(el => {
+                        el.style.backgroundColor = config.surface_color || defaultConfig.surface_color;
+                    });
+                    document.querySelectorAll('h1, h2, h3, h4').forEach(el => {
+                        el.style.color = config.text_color || defaultConfig.text_color;
+                    });
+
+                    // Update text content
+                    const siteTitle = document.getElementById('site-title');
+                    if (siteTitle) siteTitle.innerHTML = `<span class="text-slate-800">${(config.site_title || defaultConfig.site_title).split('ID')[0]}</span><span class="text-green-600">ID</span>`;
+
+                    const heroHeading = document.getElementById('hero-heading');
+                    if (heroHeading) {
+                        const heading = config.hero_heading || defaultConfig.hero_heading;
+                        const parts = heading.split(',');
+                        heroHeading.innerHTML = parts.length > 1 
+                            ? `${parts[0]}, <br><span class="gradient-text">${parts[1].trim()}</span>`
+                            : heading;
+                    }
+
+                    const heroSubheading = document.getElementById('hero-subheading');
+                    if (heroSubheading) heroSubheading.textContent = config.hero_subheading || defaultConfig.hero_subheading;
+                },
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || 'Poppins',
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || 16,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ['site_title', config.site_title || defaultConfig.site_title],
+                    ['hero_heading', config.hero_heading || defaultConfig.hero_heading],
+                    ['hero_subheading', config.hero_subheading || defaultConfig.hero_subheading]
+                ])
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Class tab switching
+        function showClass(classNum) {
+            // Hide all content
+            document.querySelectorAll('.class-content').forEach(el => el.classList.add('hidden'));
+            // Show selected content
+            document.getElementById(`class-content-${classNum}`).classList.remove('hidden');
             
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8 font-semibold text-slate-600">
-                <a href="#materi" class="hover:text-indigo-600 transition">Materi</a>
-                <a href="#lkpd" class="hover:text-indigo-600 transition">LKPD</a>
-                <a href="#kuis" class="hover:text-indigo-600 transition">Kuis</a>
-                <a href="#asesmen" class="hover:text-indigo-600 transition">Asesmen</a>
-            </div>
+            // Update button styles
+            document.querySelectorAll('.class-btn').forEach(btn => {
+                btn.className = 'class-btn px-8 py-3 rounded-xl font-bold transition-all text-slate-600 hover:bg-amber-50';
+            });
+            document.getElementById(`btn-class-${classNum}`).className = 'class-btn px-8 py-3 rounded-xl font-bold transition-all bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg';
+        }
 
-            <div class="md:hidden text-slate-600">
-                <i class="fas fa-bars text-2xl"></i>
-            </div>
-        </nav>
-    </header>
+        // Quiz functionality
+        const quizQuestions = [
+            {
+                question: "Apa yang dimaksud dengan teks prosedur?",
+                options: [
+                    "Teks yang berisi langkah-langkah melakukan sesuatu",
+                    "Teks yang berisi cerita fantasi",
+                    "Teks yang berisi laporan berita",
+                    "Teks yang berisi puisi rakyat"
+                ],
+                correct: 0
+            },
+            {
+                question: "Struktur teks berita yang benar adalah...",
+                options: [
+                    "Orientasi - Komplikasi - Resolusi",
+                    "Tesis - Argumentasi - Penegasan",
+                    "Judul - Teras - Tubuh Berita",
+                    "Pembukaan - Isi - Penutup"
+                ],
+                correct: 2
+            },
+            {
+                question: "Pantun termasuk jenis puisi rakyat yang memiliki...",
+                options: [
+                    "2 baris",
+                    "4 baris dengan rima a-b-a-b",
+                    "6 baris",
+                    "8 baris"
+                ],
+                correct: 1
+            },
+            {
+                question: "Unsur intrinsik cerpen meliputi...",
+                options: [
+                    "Tema, latar, tokoh, alur",
+                    "Penerbit, tahun terbit, halaman",
+                    "Biografi penulis, sinopsis",
+                    "Judul, daftar isi, indeks"
+                ],
+                correct: 0
+            },
+            {
+                question: "Kalimat persuasif adalah kalimat yang bertujuan untuk...",
+                options: [
+                    "Menjelaskan sesuatu",
+                    "Menceritakan pengalaman",
+                    "Mengajak atau membujuk pembaca",
+                    "Memberikan informasi fakta"
+                ],
+                correct: 2
+            }
+        ];
 
-    <!-- Hero Section -->
-    <section class="hero-gradient pt-40 pb-20 px-6">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 space-y-8 text-center md:text-left">
-                <div class="inline-block px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold uppercase tracking-wider">
-                    Portal Belajar SMP YPS Singkole
-                </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">
-                    Kuasai Bahasa, <br> <span class="text-indigo-600">Genggam Dunia.</span>
-                </h1>
-                <p class="text-lg text-slate-600 max-w-lg">
-                    Platform pembelajaran Bahasa Indonesia interaktif. Tingkatkan kemampuan literasi dan kembangkan potensimu bersama kami.
-                </p>
-                <!-- CTA Button Re-added -->
-                <div class="flex justify-center md:justify-start">
-                    <a href="#menu" class="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-indigo-700 transition flex items-center justify-center gap-3 shadow-xl shadow-indigo-200">
-                        Mulai Belajar Sekarang <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
-                <div class="relative w-full max-w-md">
-                    <div class="absolute -top-4 -left-4 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-                    <div class="absolute -bottom-8 -right-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-                    <img src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?auto=format&fit=crop&q=80&w=1000" alt="Belajar Bahasa Indonesia" class="relative rounded-3xl shadow-2xl object-cover h-96 w-full">
-                </div>
-            </div>
-        </div>
-    </section>
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+        let timerInterval;
 
-    <!-- Menu Section -->
-    <section id="menu" class="py-24 px-6 bg-white">
-        <div class="container mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Pilih Menu Pembelajaran</h2>
-                <p class="text-slate-500">Akses berbagai modul dan instrumen pembelajaran Bahasa Indonesia dalam satu tempat.</p>
-            </div>
+        function startQuiz() {
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            currentQuestion = 0;
+            score = 0;
+            answers = new Array(quizQuestions.length).fill(null);
+            showQuestion();
+            startTimer();
+        }
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Materi -->
-                <div id="materi" class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
-                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-600 group-hover:text-white transition">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Modul Materi</h3>
-                    <p class="text-slate-600 mb-6">Kumpulan materi teks deskripsi, puisi, drama, dan karya ilmiah yang disusun secara sistematis.</p>
-                    <a href="#" class="text-blue-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                        Lihat Materi <i class="fas fa-chevron-right text-xs"></i>
-                    </a>
+        function showQuestion() {
+            const q = quizQuestions[currentQuestion];
+            document.getElementById('quiz-progress').textContent = `Soal ${currentQuestion + 1} dari ${quizQuestions.length}`;
+            
+            const questionHTML = `
+                <h4 class="text-xl font-bold text-slate-900 mb-6">${q.question}</h4>
+                <div class="space-y-3">
+                    ${q.options.map((opt, i) => `
+                        <button onclick="selectAnswer(this, ${i})" class="quiz-option w-full text-left p-4 rounded-xl border-2 ${answers[currentQuestion] === i ? 'border-purple-500 bg-purple-50' : 'border-slate-200'} hover:border-purple-400 hover:bg-purple-50 transition font-medium">
+                            ${String.fromCharCode(65 + i)}. ${opt}
+                        </button>
+                    `).join('')}
                 </div>
+            `;
+            document.getElementById('quiz-question').innerHTML = questionHTML;
+            
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').textContent = currentQuestion === quizQuestions.length - 1 ? 'Selesai' : 'Selanjutnya →';
+        }
 
-                <!-- LKPD -->
-                <div id="lkpd" class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
-                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition">
-                        <i class="fas fa-file-signature"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">LKPD Digital</h3>
-                    <p class="text-slate-600 mb-6">Lembar Kerja Peserta Didik yang interaktif untuk mengasah kemampuan literasi dan berpikir kritis.</p>
-                    <a href="#" class="text-emerald-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                        Unduh LKPD <i class="fas fa-chevron-right text-xs"></i>
-                    </a>
-                </div>
+        function selectAnswer(btn, index) {
+            answers[currentQuestion] = index;
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('border-purple-500', 'bg-purple-50');
+                opt.classList.add('border-slate-200');
+            });
+            btn.classList.remove('border-slate-200');
+            btn.classList.add('border-purple-500', 'bg-purple-50');
+        }
 
-                <!-- Kuis Interaktif -->
-                <div id="kuis" class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
-                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-amber-600 group-hover:text-white transition">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Kuis Interaktif</h3>
-                    <p class="text-slate-600 mb-6">Uji pemahamanmu dengan cara yang seru melalui kuis berbasis game dan skor langsung.</p>
-                    <a href="#" class="text-amber-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                        Mainkan Kuis <i class="fas fa-chevron-right text-xs"></i>
-                    </a>
-                </div>
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
 
-                <!-- Ice Breaking -->
-                <div class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
-                    <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition">
-                        <i class="fas fa-ice-cream"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Ice Breaking</h3>
-                    <p class="text-slate-600 mb-6">Kumpulan permainan singkat untuk menyegarkan suasana belajar di dalam kelas.</p>
-                    <a href="#" class="text-pink-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                        Segarkan Suasana <i class="fas fa-chevron-right text-xs"></i>
-                    </a>
-                </div>
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
 
-                <!-- Asesmen -->
-                <div id="asesmen" class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
-                    <div class="w-14 h-14 bg-violet-100 text-violet-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-violet-600 group-hover:text-white transition">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Asesmen</h3>
-                    <p class="text-slate-600 mb-6">Evaluasi formatif dan sumatif untuk mengukur capaian pembelajaran peserta didik.</p>
-                    <a href="#" class="text-violet-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                        Mulai Asesmen <i class="fas fa-chevron-right text-xs"></i>
-                    </a>
-                </div>
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            score = answers.reduce((acc, ans, i) => acc + (ans === quizQuestions[i].correct ? 1 : 0), 0);
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('result-score').textContent = `${percentage}/100`;
+            document.querySelector('#quiz-result p:last-of-type').textContent = `Kamu menjawab ${score} dari ${quizQuestions.length} soal dengan benar`;
+        }
 
-                <!-- Footer Info Card -->
-                <div class="card-hover bg-slate-900 p-8 rounded-3xl border border-transparent flex flex-col justify-center text-white">
-                    <h3 class="text-xl font-bold mb-3 text-indigo-400">Panduan Belajar</h3>
-                    <p class="text-slate-400 text-sm">Bacalah petunjuk pada setiap modul sebelum memulai pengerjaan tugas atau kuis interaktif.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        function restartQuiz() {
+            startQuiz();
+        }
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-16 px-6">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="bg-indigo-600 p-2 rounded-lg text-white">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <span class="text-2xl font-extrabold text-white">Bahasa<span class="text-indigo-500">ID</span></span>
-                    </div>
-                    <p class="max-w-sm leading-relaxed">
-                        Membangun generasi literat dengan pemanfaatan teknologi dalam pembelajaran Bahasa Indonesia yang bermakna dan berdiferensiasi.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6">Tautan Cepat</h4>
-                    <ul class="space-y-4">
-                        <li><a href="#" class="hover:text-white transition">Beranda</a></li>
-                        <li><a href="#materi" class="hover:text-white transition">Daftar Materi</a></li>
-                        <li><a href="#kuis" class="hover:text-white transition">Pusat Kuis</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6">Ikuti Kami</h4>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-slate-800 text-center text-sm">
-                <p>&copy; 2025 BahasaID - SMP YPS Singkole. Didesain dengan penuh dedikasi untuk pendidikan.</p>
-            </div>
-        </div>
-    </footer>
+        function startTimer() {
+            let timeLeft = 120;
+            updateTimerDisplay(timeLeft);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay(timeLeft);
+                if (timeLeft <= 0) {
+                    finishQuiz();
+                }
+            }, 1000);
+        }
 
-</body>
+        function updateTimerDisplay(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('quiz-timer').textContent = `⏱️ ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b6646f35760c61e',t:'MTc2NzE0NzQxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
