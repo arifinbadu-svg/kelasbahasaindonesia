@@ -85,6 +85,22 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -107,7 +123,7 @@
      </div>
     </nav><!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-amber-100 px-6 py-4">
-     <div class="flex flex-col gap-4 font-semibold text-slate-600"><a href="#materi" class="hover:text-orange-600 transition py-2">����� Materi</a> <a href="#lkpd" class="hover:text-orange-600 transition py-2">📝 LKPD</a> <a href="#kuis" class="hover:text-orange-600 transition py-2">🎯 Kuis</a> <a href="#asesmen" class="hover:text-orange-600 transition py-2">📊 Asesmen</a>
+     <div class="flex flex-col gap-4 font-semibold text-slate-600"><a href="#materi" class="hover:text-orange-600 transition py-2">📚 Materi</a> <a href="#lkpd" class="hover:text-orange-600 transition py-2">📝 LKPD</a> <a href="#kuis" class="hover:text-orange-600 transition py-2">🎯 Kuis</a> <a href="#asesmen" class="hover:text-orange-600 transition py-2">📊 Asesmen</a>
      </div>
     </div>
    </header><!-- Hero Section -->
@@ -238,9 +254,9 @@
      <div class="flex justify-center mb-12">
       <div class="inline-flex bg-white rounded-2xl p-2 shadow-lg border border-amber-100"><button onclick="showClass(7)" id="btn-class-7" class="class-btn px-8 py-3 rounded-xl font-bold transition-all bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg"> Kelas VII </button> <button onclick="showClass(8)" id="btn-class-8" class="class-btn px-8 py-3 rounded-xl font-bold transition-all text-slate-600 hover:bg-amber-50"> Kelas VIII </button> <button onclick="showClass(9)" id="btn-class-9" class="class-btn px-8 py-3 rounded-xl font-bold transition-all text-slate-600 hover:bg-amber-50"> Kelas IX </button>
       </div>
-     </div><!-- Class Content -->
+     </div><!-- Class VII Content -->
      <div id="class-content-7" class="class-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+      <div onclick="openMateri('fantasi')" class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
        <div class="flex items-start gap-4">
         <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
          📖
@@ -253,7 +269,7 @@
         </div>
        </div>
       </div>
-      <div class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
+      <div onclick="openMateri('prosedur')" class="bg-white rounded-2xl p-6 border-2 border-lime-100 hover:border-blue-300 card-hover cursor-pointer">
        <div class="flex items-start gap-4">
         <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
          ✍️
@@ -318,7 +334,7 @@
         </div>
        </div>
       </div>
-     </div>
+     </div><!-- Class VIII Content -->
      <div id="class-content-8" class="class-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
        <div class="flex items-start gap-4">
@@ -359,15 +375,15 @@
         </div>
        </div>
       </div>
-      <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-emerald-300 card-hover cursor-pointer">
+      <div onclick="openMateri('drama')" class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-orange-300 card-hover cursor-pointer">
        <div class="flex items-start gap-4">
         <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
-         ��
+         🎭
         </div>
         <div><span class="text-xs font-bold text-orange-600 uppercase">Bab 4</span>
          <h4 class="font-bold text-slate-900 mb-1">Teks Drama</h4>
          <p class="text-sm text-slate-500">Menulis dan mementaskan drama</p>
-         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">8 Materi</span>
+         <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">8 Materi</span> <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium">2 Video</span>
          </div>
         </div>
        </div>
@@ -398,7 +414,7 @@
         </div>
        </div>
       </div>
-     </div>
+     </div><!-- Class IX Content -->
      <div id="class-content-9" class="class-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="bg-white rounded-2xl p-6 border-2 border-amber-100 hover:border-purple-300 card-hover cursor-pointer">
        <div class="flex items-start gap-4">
@@ -517,7 +533,7 @@
    </section><!-- Kuis Section -->
    <section id="kuis" class="py-20 px-6 bg-gradient-to-b from-purple-50 to-white">
     <div class="container mx-auto">
-     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> �� Kuis Interaktif </span>
+     <div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4"> 🎯 Kuis Interaktif </span>
       <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Uji Pemahamanmu</h2>
       <p class="text-slate-600 max-w-2xl mx-auto">Tantang dirimu dengan kuis seru dan dapatkan skor terbaikmu!</p>
      </div>
@@ -588,7 +604,433 @@
       </div>
      </div>
     </div>
-   </section><!-- Footer -->
+   </section><!-- Materi Fantasi Modal -->
+   <div id="materi-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90%] overflow-hidden shadow-2xl">
+     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 flex justify-between items-center">
+      <div><span class="text-blue-200 text-sm font-medium">BAB 1 - Kelas VII</span>
+       <h2 class="text-2xl font-bold">Teks Cerita Fantasi</h2>
+      </div><button onclick="closeMateri()" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-xl flex items-center justify-center transition">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+     </div>
+     <div class="p-6 overflow-y-auto max-h-[calc(90%-120px)]">
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 mb-6 border border-amber-200">
+       <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-3"><span class="text-xl">🎯</span> Tujuan Pembelajaran</h3>
+       <ul class="space-y-2 text-slate-700 text-sm">
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Memahami pengertian dan ciri-ciri teks cerita fantasi</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Mengidentifikasi struktur teks cerita fantasi</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Menganalisis unsur intrinsik cerita fantasi</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Menulis teks cerita fantasi sederhana</li>
+       </ul>
+      </div>
+      <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+       <h3 class="text-xl font-bold text-slate-900 mb-4">Pengertian Teks Cerita Fantasi</h3>
+       <p class="text-slate-600 leading-relaxed">Teks cerita fantasi adalah cerita fiksi yang mengandung unsur-unsur imajinasi atau khayalan yang tidak mungkin terjadi di dunia nyata.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Materi Prosedur Modal -->
+   <div id="materi-prosedur-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90%] overflow-hidden shadow-2xl">
+     <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6 flex justify-between items-center">
+      <div><span class="text-emerald-200 text-sm font-medium">BAB 2 - Kelas VII</span>
+       <h2 class="text-2xl font-bold">Teks Prosedur</h2>
+      </div><button onclick="closeMateriProsedur()" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-xl flex items-center justify-center transition">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+     </div>
+     <div class="p-6 overflow-y-auto max-h-[calc(90%-120px)]">
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 mb-6 border border-amber-200">
+       <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-3"><span class="text-xl">🎯</span> Tujuan Pembelajaran</h3>
+       <ul class="space-y-2 text-slate-700 text-sm">
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Memahami pengertian dan ciri-ciri teks prosedur</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Mengidentifikasi jenis-jenis teks prosedur</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Menganalisis struktur dan kaidah kebahasaan teks prosedur</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Menyusun teks prosedur dengan langkah yang tepat</li>
+       </ul>
+      </div>
+      <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+       <h3 class="text-xl font-bold text-slate-900 mb-4">Pengertian Teks Prosedur</h3>
+       <p class="text-slate-600 leading-relaxed">Teks prosedur adalah teks yang berisi langkah-langkah atau tahapan yang harus dilakukan untuk mencapai suatu tujuan tertentu.</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Materi Drama Modal -->
+   <div id="materi-drama-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90%] overflow-hidden shadow-2xl"><!-- Modal Header -->
+     <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 flex justify-between items-center">
+      <div><span class="text-orange-200 text-sm font-medium">BAB 4 - Kelas VIII</span>
+       <h2 class="text-2xl font-bold">Teks Drama</h2>
+      </div><button onclick="closeMateriDrama()" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-xl flex items-center justify-center transition">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+     </div><!-- Modal Content -->
+     <div class="p-6 overflow-y-auto max-h-[calc(90%-120px)]"><!-- Learning Objectives -->
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 mb-6 border border-amber-200">
+       <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-3"><span class="text-xl">🎯</span> Tujuan Pembelajaran</h3>
+       <ul class="space-y-2 text-slate-700 text-sm">
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Memahami pengertian dan ciri-ciri teks drama</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Mengidentifikasi jenis-jenis drama</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Menganalisis struktur dan kaidah kebahasaan teks drama</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span>Menyusun dan mementaskan teks drama</li>
+       </ul>
+      </div><!-- Main Content -->
+      <div class="space-y-6"><!-- Section 1: Pengertian -->
+       <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="w-8 h-8 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-sm font-bold">1</span> Pengertian Teks Drama</h3>
+        <p class="text-slate-600 leading-relaxed mb-4"><strong>Teks drama</strong> adalah karya sastra yang ditulis dalam bentuk dialog dan dirancang untuk dipentaskan di atas panggung. Drama berasal dari bahasa Yunani "draomai" yang berarti berbuat, bertindak, atau beraksi. Teks drama memuat cerita yang dikemas dalam bentuk percakapan antar tokoh disertai petunjuk lakuan (stage direction).</p>
+        <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-orange-500">
+         <p class="text-orange-800 text-sm italic">💡 <strong>Penting:</strong> Drama berbeda dengan prosa dan puisi. Drama ditulis untuk dipentaskan, sehingga dialog dan petunjuk lakuan menjadi unsur utamanya.</p>
+        </div>
+       </div><!-- Section 2: Ciri-Ciri -->
+       <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-sm font-bold">2</span> Ciri-Ciri Teks Drama</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2"><span class="text-2xl">💬</span>
+           <h4 class="font-bold text-slate-800">Berbentuk Dialog</h4>
+          </div>
+          <p class="text-sm text-slate-600">Cerita disampaikan melalui percakapan antar tokoh</p>
+         </div>
+         <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🎬</span>
+           <h4 class="font-bold text-slate-800">Ada Petunjuk Lakuan</h4>
+          </div>
+          <p class="text-sm text-slate-600">Terdapat keterangan tentang gerak, ekspresi, dan suasana</p>
+         </div>
+         <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🎭</span>
+           <h4 class="font-bold text-slate-800">Untuk Dipentaskan</h4>
+          </div>
+          <p class="text-sm text-slate-600">Dirancang untuk ditampilkan di hadapan penonton</p>
+         </div>
+         <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2"><span class="text-2xl">👥</span>
+           <h4 class="font-bold text-slate-800">Tokoh Jelas</h4>
+          </div>
+          <p class="text-sm text-slate-600">Nama tokoh ditulis sebelum dialog yang diucapkan</p>
+         </div>
+         <div class="bg-gradient-to-br from-rose-50 to-red-50 rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2"><span class="text-2xl">⚡</span>
+           <h4 class="font-bold text-slate-800">Konflik Kuat</h4>
+          </div>
+          <p class="text-sm text-slate-600">Cerita digerakkan oleh konflik antar tokoh</p>
+         </div>
+         <div class="bg-gradient-to-br from-cyan-50 to-sky-50 rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2"><span class="text-2xl">📍</span>
+           <h4 class="font-bold text-slate-800">Terbagi dalam Babak</h4>
+          </div>
+          <p class="text-sm text-slate-600">Cerita dibagi menjadi beberapa babak dan adegan</p>
+         </div>
+        </div>
+       </div><!-- Section 3: Jenis-Jenis -->
+       <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-sm font-bold">3</span> Jenis-Jenis Drama</h3>
+        <div class="space-y-4">
+         <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-red-50 to-transparent rounded-xl border-l-4 border-red-500">
+          <div class="w-12 h-12 bg-red-500 text-white rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+           😢
+          </div>
+          <div>
+           <h4 class="font-bold text-slate-900">Tragedi</h4>
+           <p class="text-sm text-slate-600">Drama yang berakhir dengan kesedihan atau kematian tokoh utama.</p><span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full mt-2 inline-block">Contoh: Romeo dan Juliet</span>
+          </div>
+         </div>
+         <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-yellow-50 to-transparent rounded-xl border-l-4 border-yellow-500">
+          <div class="w-12 h-12 bg-yellow-500 text-white rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+           😂
+          </div>
+          <div>
+           <h4 class="font-bold text-slate-900">Komedi</h4>
+           <p class="text-sm text-slate-600">Drama yang mengandung unsur humor dan berakhir bahagia.</p><span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full mt-2 inline-block">Contoh: Srimulat, Opera Van Java</span>
+          </div>
+         </div>
+         <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-purple-50 to-transparent rounded-xl border-l-4 border-purple-500">
+          <div class="w-12 h-12 bg-purple-500 text-white rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+           🎭
+          </div>
+          <div>
+           <h4 class="font-bold text-slate-900">Tragikomedi</h4>
+           <p class="text-sm text-slate-600">Drama yang memadukan unsur tragedi dan komedi.</p><span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full mt-2 inline-block">Contoh: Drama-drama W.S. Rendra</span>
+          </div>
+         </div>
+         <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-50 to-transparent rounded-xl border-l-4 border-blue-500">
+          <div class="w-12 h-12 bg-blue-500 text-white rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+           🎵
+          </div>
+          <div>
+           <h4 class="font-bold text-slate-900">Drama Musikal</h4>
+           <p class="text-sm text-slate-600">Drama yang menyertakan musik, lagu, dan tarian dalam pementasan.</p><span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full mt-2 inline-block">Contoh: Laskar Pelangi The Musical</span>
+          </div>
+         </div>
+         <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-green-50 to-transparent rounded-xl border-l-4 border-green-500">
+          <div class="w-12 h-12 bg-green-500 text-white rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+           🎪
+          </div>
+          <div>
+           <h4 class="font-bold text-slate-900">Melodrama</h4>
+           <p class="text-sm text-slate-600">Drama yang melebih-lebihkan emosi dan menampilkan tokoh baik vs jahat.</p><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full mt-2 inline-block">Contoh: Sinetron Indonesia</span>
+          </div>
+         </div>
+        </div>
+       </div><!-- Section 4: Struktur -->
+       <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-sm font-bold">4</span> Struktur Teks Drama</h3>
+        <div class="space-y-4">
+         <div class="relative pl-8 pb-6 border-l-2 border-orange-300">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+           1
+          </div>
+          <div class="bg-orange-50 rounded-xl p-4">
+           <h4 class="font-bold text-orange-800 mb-1">Prolog</h4>
+           <p class="text-sm text-slate-600">Bagian pembuka drama yang berisi pengantar cerita, latar belakang, atau kata pengantar dari dalang/narator.</p>
+          </div>
+         </div>
+         <div class="relative pl-8 pb-6 border-l-2 border-blue-300">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+           2
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4">
+           <h4 class="font-bold text-blue-800 mb-1">Orientasi</h4>
+           <p class="text-sm text-slate-600">Bagian perkenalan tokoh, latar waktu, dan latar tempat cerita.</p>
+          </div>
+         </div>
+         <div class="relative pl-8 pb-6 border-l-2 border-amber-300">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+           3
+          </div>
+          <div class="bg-amber-50 rounded-xl p-4">
+           <h4 class="font-bold text-amber-800 mb-1">Komplikasi</h4>
+           <p class="text-sm text-slate-600">Bagian yang berisi munculnya konflik atau masalah yang dihadapi tokoh.</p>
+          </div>
+         </div>
+         <div class="relative pl-8 pb-6 border-l-2 border-red-300">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+           4
+          </div>
+          <div class="bg-red-50 rounded-xl p-4">
+           <h4 class="font-bold text-red-800 mb-1">Klimaks</h4>
+           <p class="text-sm text-slate-600">Puncak konflik atau titik tertinggi ketegangan dalam cerita.</p>
+          </div>
+         </div>
+         <div class="relative pl-8 pb-6 border-l-2 border-green-300">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+           5
+          </div>
+          <div class="bg-green-50 rounded-xl p-4">
+           <h4 class="font-bold text-green-800 mb-1">Resolusi</h4>
+           <p class="text-sm text-slate-600">Penyelesaian konflik dan penurunan ketegangan cerita.</p>
+          </div>
+         </div>
+         <div class="relative pl-8">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+           6
+          </div>
+          <div class="bg-purple-50 rounded-xl p-4">
+           <h4 class="font-bold text-purple-800 mb-1">Epilog</h4>
+           <p class="text-sm text-slate-600">Bagian penutup yang berisi kesimpulan cerita atau amanat yang ingin disampaikan.</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Section 5: Kaidah Kebahasaan -->
+       <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="w-8 h-8 bg-rose-100 text-rose-600 rounded-lg flex items-center justify-center text-sm font-bold">5</span> Kaidah Kebahasaan Teks Drama</h3>
+        <div class="overflow-x-auto">
+         <table class="w-full text-sm">
+          <thead>
+           <tr class="bg-gradient-to-r from-rose-100 to-pink-100">
+            <th class="text-left p-3 rounded-tl-xl font-bold text-slate-700">Kaidah</th>
+            <th class="text-left p-3 font-bold text-slate-700">Penjelasan</th>
+            <th class="text-left p-3 rounded-tr-xl font-bold text-slate-700">Contoh</th>
+           </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+           <tr>
+            <td class="p-3 font-medium text-slate-800">Kalimat Langsung</td>
+            <td class="p-3 text-slate-600">Dialog tokoh ditulis dalam bentuk kalimat langsung</td>
+            <td class="p-3 text-rose-700 italic">"Aku tidak akan menyerah!"</td>
+           </tr>
+           <tr class="bg-slate-50">
+            <td class="p-3 font-medium text-slate-800">Kata Ganti Orang</td>
+            <td class="p-3 text-slate-600">Menggunakan kata ganti orang pertama dan kedua</td>
+            <td class="p-3 text-rose-700 italic">aku, kamu, engkau, kita</td>
+           </tr>
+           <tr>
+            <td class="p-3 font-medium text-slate-800">Petunjuk Lakuan</td>
+            <td class="p-3 text-slate-600">Keterangan gerak, ekspresi dalam tanda kurung</td>
+            <td class="p-3 text-rose-700 italic">(berjalan mondar-mandir dengan gelisah)</td>
+           </tr>
+           <tr class="bg-slate-50">
+            <td class="p-3 font-medium text-slate-800">Kalimat Perintah</td>
+            <td class="p-3 text-slate-600">Kalimat yang menyuruh atau meminta seseorang</td>
+            <td class="p-3 text-rose-700 italic">"Pergi dari sini sekarang juga!"</td>
+           </tr>
+           <tr>
+            <td class="p-3 font-medium text-slate-800">Kalimat Seru</td>
+            <td class="p-3 text-slate-600">Kalimat yang mengungkapkan emosi kuat</td>
+            <td class="p-3 text-rose-700 italic">"Wah, sungguh mengejutkan!"</td>
+           </tr>
+           <tr class="bg-slate-50">
+            <td class="p-3 font-medium text-slate-800">Konjungsi Temporal</td>
+            <td class="p-3 text-slate-600">Kata penghubung waktu dalam petunjuk lakuan</td>
+            <td class="p-3 text-rose-700 italic">kemudian, lalu, setelah itu, tiba-tiba</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div><!-- Section 6: Langkah-Langkah Menyusun -->
+       <div class="bg-white rounded-2xl border-2 border-slate-100 p-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-sm font-bold">6</span> Langkah-Langkah Menyusun Teks Drama</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-5 border border-indigo-200">
+          <div class="flex items-center gap-3 mb-3">
+           <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold">
+            1
+           </div>
+           <h4 class="font-bold text-slate-800">Tentukan Tema</h4>
+          </div>
+          <p class="text-sm text-slate-600">Pilih tema yang menarik seperti persahabatan, keluarga, atau cinta tanah air.</p>
+         </div>
+         <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-5 border border-emerald-200">
+          <div class="flex items-center gap-3 mb-3">
+           <div class="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold">
+            2
+           </div>
+           <h4 class="font-bold text-slate-800">Buat Kerangka Cerita</h4>
+          </div>
+          <p class="text-sm text-slate-600">Susun alur cerita dari awal hingga akhir termasuk konflik dan penyelesaiannya.</p>
+         </div>
+         <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+          <div class="flex items-center gap-3 mb-3">
+           <div class="w-10 h-10 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold">
+            3
+           </div>
+           <h4 class="font-bold text-slate-800">Tentukan Tokoh</h4>
+          </div>
+          <p class="text-sm text-slate-600">Ciptakan tokoh dengan karakter yang jelas (protagonis, antagonis, tritagonis).</p>
+         </div>
+         <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+          <div class="flex items-center gap-3 mb-3">
+           <div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold">
+            4
+           </div>
+           <h4 class="font-bold text-slate-800">Tentukan Latar</h4>
+          </div>
+          <p class="text-sm text-slate-600">Tentukan latar tempat, waktu, dan suasana yang mendukung cerita.</p>
+         </div>
+         <div class="bg-gradient-to-br from-rose-50 to-red-50 rounded-xl p-5 border border-rose-200">
+          <div class="flex items-center gap-3 mb-3">
+           <div class="w-10 h-10 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">
+            5
+           </div>
+           <h4 class="font-bold text-slate-800">Tulis Dialog</h4>
+          </div>
+          <p class="text-sm text-slate-600">Kembangkan cerita dalam bentuk dialog antar tokoh yang natural.</p>
+         </div>
+         <div class="bg-gradient-to-br from-cyan-50 to-sky-50 rounded-xl p-5 border border-cyan-200">
+          <div class="flex items-center gap-3 mb-3">
+           <div class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold">
+            6
+           </div>
+           <h4 class="font-bold text-slate-800">Tambah Petunjuk Lakuan</h4>
+          </div>
+          <p class="text-sm text-slate-600">Sertakan petunjuk gerak, ekspresi, dan suasana dalam tanda kurung.</p>
+         </div>
+        </div>
+       </div><!-- Section 7: Contoh Drama -->
+       <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 border border-orange-200">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="text-2xl">📜</span> Contoh Naskah Drama</h3>
+        <div class="bg-white rounded-xl p-5 shadow-sm">
+         <h4 class="font-bold text-orange-700 mb-4 text-center text-lg border-b border-orange-200 pb-3">PERSAHABATAN SEJATI</h4>
+         <div class="text-sm text-slate-600 italic mb-4 text-center">
+          Babak I - Di Ruang Kelas
+         </div>
+         <div class="space-y-4 text-sm">
+          <p class="text-slate-500 italic">(Terlihat Andi sedang duduk sendirian di pojok kelas. Budi masuk dengan wajah ceria.)</p>
+          <div class="pl-4 border-l-2 border-blue-300">
+           <p><strong class="text-blue-700">BUDI:</strong> (menghampiri Andi) Hei, Andi! Kenapa kamu murung begitu?</p>
+          </div>
+          <div class="pl-4 border-l-2 border-green-300">
+           <p><strong class="text-green-700">ANDI:</strong> (menghela napas) Aku sedih, Bud. Nilai ulanganku jelek sekali.</p>
+          </div>
+          <div class="pl-4 border-l-2 border-blue-300">
+           <p><strong class="text-blue-700">BUDI:</strong> (duduk di samping Andi) Jangan berkecil hati. Kita bisa belajar bersama mulai sekarang!</p>
+          </div>
+          <div class="pl-4 border-l-2 border-green-300">
+           <p><strong class="text-green-700">ANDI:</strong> (mengangkat kepala) Benarkah? Kamu mau membantuku?</p>
+          </div>
+          <div class="pl-4 border-l-2 border-blue-300">
+           <p><strong class="text-blue-700">BUDI:</strong> (tersenyum dan menepuk pundak Andi) Tentu saja! Itulah gunanya teman. Kita saling membantu dalam suka maupun duka.</p>
+          </div>
+          <p class="text-slate-500 italic">(Tiba-tiba Citra masuk dengan membawa buku-buku tebal.)</p>
+          <div class="pl-4 border-l-2 border-pink-300">
+           <p><strong class="text-pink-700">CITRA:</strong> (antusias) Hai, teman-teman! Aku dengar kalian mau belajar kelompok? Boleh aku ikut?</p>
+          </div>
+          <div class="pl-4 border-l-2 border-green-300">
+           <p><strong class="text-green-700">ANDI:</strong> (wajahnya mulai cerah) Wah, tentu boleh! Semakin banyak semakin seru!</p>
+          </div>
+          <div class="pl-4 border-l-2 border-blue-300">
+           <p><strong class="text-blue-700">BUDI:</strong> Betul! Dengan belajar bersama, kita pasti bisa meraih hasil yang lebih baik. Ingat, persahabatan sejati adalah saling mendukung!</p>
+          </div>
+          <p class="text-slate-500 italic">(Mereka bertiga saling berpandangan dan tersenyum. Layar perlahan menutup.)</p>
+          <div class="mt-4 pt-4 border-t border-slate-200 text-center">
+           <p class="text-slate-700 font-medium">--- TAMAT ---</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Section 8: Video Drama -->
+       <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 border border-purple-200">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3"><span class="text-2xl">🎬</span> Video Pembelajaran Drama</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+         <div class="bg-white rounded-xl p-4 shadow-sm">
+          <div class="video-container bg-slate-200 mb-3">
+           <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-500">
+            <div class="text-center text-white">
+             <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M8 5v14l11-7z" />
+              </svg>
+             </div>
+             <p class="font-medium">Video 1</p>
+             <p class="text-sm text-purple-200">Pengenalan Teks Drama</p>
+            </div>
+           </div>
+          </div>
+          <h4 class="font-bold text-slate-800 mb-1">Pengenalan Teks Drama</h4>
+          <p class="text-xs text-slate-500">Durasi: 10 menit</p>
+         </div>
+         <div class="bg-white rounded-xl p-4 shadow-sm">
+          <div class="video-container bg-slate-200 mb-3">
+           <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-500 to-red-500">
+            <div class="text-center text-white">
+             <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M8 5v14l11-7z" />
+              </svg>
+             </div>
+             <p class="font-medium">Video 2</p>
+             <p class="text-sm text-orange-200">Contoh Pementasan Drama</p>
+            </div>
+           </div>
+          </div>
+          <h4 class="font-bold text-slate-800 mb-1">Contoh Pementasan Drama</h4>
+          <p class="text-xs text-slate-500">Durasi: 15 menit</p>
+         </div>
+        </div>
+       </div><!-- Tips Section -->
+       <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-6 text-white">
+        <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><span class="text-2xl">💡</span> Tips Menulis &amp; Mementaskan Drama</h3>
+        <ul class="space-y-3 text-orange-50">
+         <li class="flex items-start gap-3"><span class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm flex-shrink-0">1</span> Buat dialog yang natural seperti percakapan sehari-hari</li>
+         <li class="flex items-start gap-3"><span class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm flex-shrink-0">2</span> Pastikan setiap tokoh memiliki karakter yang berbeda dan konsisten</li>
+         <li class="flex items-start gap-3"><span class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm flex-shrink-0">3</span> Konflik harus menarik dan mampu membangun ketegangan cerita</li>
+         <li class="flex items-start gap-3"><span class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm flex-shrink-0">4</span> Saat mementaskan, perhatikan intonasi, ekspresi, dan gerak tubuh</li>
+         <li class="flex items-start gap-3"><span class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm flex-shrink-0">5</span> Latihan berkali-kali agar penampilan lebih percaya diri</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Footer -->
    <footer class="bg-slate-900 text-white py-16 px-6">
     <div class="container mx-auto">
      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -655,16 +1097,13 @@
                     const baseFontStack = 'sans-serif';
                     const fontSize = config.font_size || 16;
 
-                    // Apply font
                     document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
 
-                    // Apply font sizes
                     document.querySelectorAll('h1').forEach(el => el.style.fontSize = `${fontSize * 3}px`);
                     document.querySelectorAll('h2').forEach(el => el.style.fontSize = `${fontSize * 2}px`);
                     document.querySelectorAll('h3').forEach(el => el.style.fontSize = `${fontSize * 1.25}px`);
                     document.querySelectorAll('p').forEach(el => el.style.fontSize = `${fontSize}px`);
 
-                    // Apply colors
                     document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
                     document.querySelectorAll('.menu-card, .bg-white').forEach(el => {
                         el.style.backgroundColor = config.surface_color || defaultConfig.surface_color;
@@ -673,7 +1112,6 @@
                         el.style.color = config.text_color || defaultConfig.text_color;
                     });
 
-                    // Update text content
                     const siteTitle = document.getElementById('site-title');
                     if (siteTitle) siteTitle.innerHTML = `<span class="text-slate-800">${(config.site_title || defaultConfig.site_title).split('ID')[0]}</span><span class="text-green-600">ID</span>`;
 
@@ -693,54 +1131,33 @@
                     recolorables: [
                         {
                             get: () => config.background_color || defaultConfig.background_color,
-                            set: (value) => {
-                                config.background_color = value;
-                                window.elementSdk.setConfig({ background_color: value });
-                            }
+                            set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
                         },
                         {
                             get: () => config.surface_color || defaultConfig.surface_color,
-                            set: (value) => {
-                                config.surface_color = value;
-                                window.elementSdk.setConfig({ surface_color: value });
-                            }
+                            set: (value) => { config.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
                         },
                         {
                             get: () => config.text_color || defaultConfig.text_color,
-                            set: (value) => {
-                                config.text_color = value;
-                                window.elementSdk.setConfig({ text_color: value });
-                            }
+                            set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
                         },
                         {
                             get: () => config.primary_action_color || defaultConfig.primary_action_color,
-                            set: (value) => {
-                                config.primary_action_color = value;
-                                window.elementSdk.setConfig({ primary_action_color: value });
-                            }
+                            set: (value) => { config.primary_action_color = value; window.elementSdk.setConfig({ primary_action_color: value }); }
                         },
                         {
                             get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
-                            set: (value) => {
-                                config.secondary_action_color = value;
-                                window.elementSdk.setConfig({ secondary_action_color: value });
-                            }
+                            set: (value) => { config.secondary_action_color = value; window.elementSdk.setConfig({ secondary_action_color: value }); }
                         }
                     ],
                     borderables: [],
                     fontEditable: {
                         get: () => config.font_family || 'Poppins',
-                        set: (value) => {
-                            config.font_family = value;
-                            window.elementSdk.setConfig({ font_family: value });
-                        }
+                        set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
                     },
                     fontSizeable: {
                         get: () => config.font_size || 16,
-                        set: (value) => {
-                            config.font_size = value;
-                            window.elementSdk.setConfig({ font_size: value });
-                        }
+                        set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
                     }
                 }),
                 mapToEditPanelValues: (config) => new Map([
@@ -761,12 +1178,9 @@
 
         // Class tab switching
         function showClass(classNum) {
-            // Hide all content
             document.querySelectorAll('.class-content').forEach(el => el.classList.add('hidden'));
-            // Show selected content
             document.getElementById(`class-content-${classNum}`).classList.remove('hidden');
             
-            // Update button styles
             document.querySelectorAll('.class-btn').forEach(btn => {
                 btn.className = 'class-btn px-8 py-3 rounded-xl font-bold transition-all text-slate-600 hover:bg-amber-50';
             });
@@ -775,56 +1189,11 @@
 
         // Quiz functionality
         const quizQuestions = [
-            {
-                question: "Apa yang dimaksud dengan teks prosedur?",
-                options: [
-                    "Teks yang berisi langkah-langkah melakukan sesuatu",
-                    "Teks yang berisi cerita fantasi",
-                    "Teks yang berisi laporan berita",
-                    "Teks yang berisi puisi rakyat"
-                ],
-                correct: 0
-            },
-            {
-                question: "Struktur teks berita yang benar adalah...",
-                options: [
-                    "Orientasi - Komplikasi - Resolusi",
-                    "Tesis - Argumentasi - Penegasan",
-                    "Judul - Teras - Tubuh Berita",
-                    "Pembukaan - Isi - Penutup"
-                ],
-                correct: 2
-            },
-            {
-                question: "Pantun termasuk jenis puisi rakyat yang memiliki...",
-                options: [
-                    "2 baris",
-                    "4 baris dengan rima a-b-a-b",
-                    "6 baris",
-                    "8 baris"
-                ],
-                correct: 1
-            },
-            {
-                question: "Unsur intrinsik cerpen meliputi...",
-                options: [
-                    "Tema, latar, tokoh, alur",
-                    "Penerbit, tahun terbit, halaman",
-                    "Biografi penulis, sinopsis",
-                    "Judul, daftar isi, indeks"
-                ],
-                correct: 0
-            },
-            {
-                question: "Kalimat persuasif adalah kalimat yang bertujuan untuk...",
-                options: [
-                    "Menjelaskan sesuatu",
-                    "Menceritakan pengalaman",
-                    "Mengajak atau membujuk pembaca",
-                    "Memberikan informasi fakta"
-                ],
-                correct: 2
-            }
+            { question: "Apa yang dimaksud dengan teks prosedur?", options: ["Teks yang berisi langkah-langkah melakukan sesuatu", "Teks yang berisi cerita fantasi", "Teks yang berisi laporan berita", "Teks yang berisi puisi rakyat"], correct: 0 },
+            { question: "Struktur teks berita yang benar adalah...", options: ["Orientasi - Komplikasi - Resolusi", "Tesis - Argumentasi - Penegasan", "Judul - Teras - Tubuh Berita", "Pembukaan - Isi - Penutup"], correct: 2 },
+            { question: "Pantun termasuk jenis puisi rakyat yang memiliki...", options: ["2 baris", "4 baris dengan rima a-b-a-b", "6 baris", "8 baris"], correct: 1 },
+            { question: "Unsur intrinsik cerpen meliputi...", options: ["Tema, latar, tokoh, alur", "Penerbit, tahun terbit, halaman", "Biografi penulis, sinopsis", "Judul, daftar isi, indeks"], correct: 0 },
+            { question: "Kalimat persuasif adalah kalimat yang bertujuan untuk...", options: ["Menjelaskan sesuatu", "Menceritakan pengalaman", "Mengajak atau membujuk pembaca", "Memberikan informasi fakta"], correct: 2 }
         ];
 
         let currentQuestion = 0;
@@ -921,6 +1290,55 @@
             document.getElementById('quiz-timer').textContent = `⏱️ ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
+        // Materi Modal Functions
+        function openMateri(type) {
+            if (type === 'fantasi') {
+                document.getElementById('materi-modal').classList.remove('hidden');
+            } else if (type === 'prosedur') {
+                document.getElementById('materi-prosedur-modal').classList.remove('hidden');
+            } else if (type === 'drama') {
+                document.getElementById('materi-drama-modal').classList.remove('hidden');
+            }
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMateri() {
+            document.getElementById('materi-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeMateriProsedur() {
+            document.getElementById('materi-prosedur-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeMateriDrama() {
+            document.getElementById('materi-drama-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('materi-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeMateri();
+        });
+
+        document.getElementById('materi-prosedur-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeMateriProsedur();
+        });
+
+        document.getElementById('materi-drama-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeMateriDrama();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMateri();
+                closeMateriProsedur();
+                closeMateriDrama();
+            }
+        });
+
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -933,5 +1351,5 @@
             });
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b6646f35760c61e',t:'MTc2NzE0NzQxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b669284453cfd75',t:'MTc2NzE1MDUwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
